@@ -12,3 +12,4 @@ The build scripts are based off [zig-bootstrap](https://codeberg.org/ziglang/zig
 Only supports Linux as a build host, only tested with Linux as a build target, but should be able to build for any supported zig-bootstrap target with some tweaks.
 
 See the [Dockerfile](./Dockerfile) for build args to tweak.
+For example, you can directly use the Zig version downloaded by mise to build the chosen commit by setting `USE_ZIG_BUILD` to a non-empty value. There are two additional targets that you may find useful: `host-llvm` and `target-llvm`. For exmaple, you can use `target-llvm` with `--output` to get LLVM libs compiled with Zig, and then use that for iterating on Zig itself on your host.

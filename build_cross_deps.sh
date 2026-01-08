@@ -4,6 +4,7 @@ set -eu
 
 # Cross compile zlib for the target, as we need the LLVM linked into
 # the final zig binary to have zlib support enabled.
+# cmake will fail to find zlib if the path doesn't include the target, /shrug
 mkdir -p "$BOOTSTRAP_DIR/out/build-zlib-$TARGET-$MCPU"
 cd "$BOOTSTRAP_DIR/out/build-zlib-$TARGET-$MCPU"
 cmake "$BOOTSTRAP_DIR/zlib" \
@@ -120,3 +121,5 @@ cmake "$BOOTSTRAP_DIR/llvm" \
   -DCLANG_TABLEGEN="$BOOTSTRAP_DIR/out/build-llvm-host/bin/clang-tblgen" \
   -DLLD_BUILD_TOOLS=OFF
 cmake --build . --target install
+
+mv $BOOTSTRAP_DIR/out/$TARGET-$MCPU $BOOTSTRAP_DIR/out/target
